@@ -27,7 +27,8 @@ COPY --from=builder /usr/src/app/out /www/example
 WORKDIR /www/example
 
 COPY ./config/nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
+COPY ./config/cert.crt /etc/nginx/ssl/server.crt
+COPY ./config/cert.key /etc/nginx/ssl/server.key
+EXPOSE 80 443
 
 CMD ["nginx", "-g", "daemon off;"]
